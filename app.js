@@ -25,6 +25,14 @@ const CONFIG = {
   }
 };
 
+/* -------------------------------------------------------------------------
+   外部連結 — 顯示在側欄「Links」區，點了會另開新分頁。
+   要再加連結，就多貼一組 { title, url }。
+   ------------------------------------------------------------------------- */
+const LINKS = [
+  { title: "腦中風照護治療連結", url: "https://notebook.google.com/notebook/9ec9a926-5d3d-4142-a53e-5d4c41280da2?authuser=0&pli=1" }
+];
+
 /* ========================================================================= */
 
 const CATS = ["Paper Review", "Neuroimaging", "Clinical Notes"];
@@ -62,6 +70,19 @@ function renderNav() {
   }).join("");
   document.querySelectorAll("[data-nav]").forEach((b) =>
     b.addEventListener("click", () => goFeed(b.dataset.nav)));
+}
+
+/* ---- 側欄外部連結 ---- */
+function renderLinks() {
+  const box = $("links");
+  if (!box || !LINKS.length) return;
+  box.innerHTML =
+    `<div class="mn-navlabel" style="margin-top:30px;padding-top:22px;border-top:1px solid var(--line)">Links</div>` +
+    LINKS.map((l) =>
+      `<a class="mn-linkitem" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">
+         <svg class="mn-mark" viewBox="0 0 12 12"><path d="M3 9 L9 3 M5 3 h4 v4" fill="none" stroke="#909DEA" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+         ${esc(l.title)}
+       </a>`).join("");
 }
 
 /* ---- Feed ---- */
@@ -192,5 +213,6 @@ function setupGoatCounter() {
 /* ---- 啟動 ---- */
 restoreFromHash();
 render();
+renderLinks();
 setupGoatCounter();
 window.addEventListener("hashchange", () => { restoreFromHash(); render(); });
