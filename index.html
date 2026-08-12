@@ -1,196 +1,51 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neuroscience Notes | 神經科學筆記</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
-                    },
-                    colors: {
-                        slate: {
-                            950: '#0b0f19',
-                            900: '#0f172a',
-                            800: '#1e293b',
-                        },
-                        teal: {
-                            500: '#0d9488',
-                            600: '#0f766e',
-                            50: '#f0fdfa',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #f8fafc;
-        }
-        .brain-avatar-bg {
-            background: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 50%, #e0e7ff 100%);
-        }
-        .header-bg {
-            background-color: #111827;
-        }
-        .card-shadow {
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
-        }
-        .card-shadow:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neuroscience Blog Platform</title>
+  <meta name="description" content="一個神經科的閱讀與思考現場——文獻心得、臨床筆記與照片。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@300;400;500;600&family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="text-slate-700 font-sans antialiased min-h-screen flex flex-col">
+<body>
+  <div class="mn-wrap">
+    <h1 class="mn-hd">Neuroscience Blog Platform</h1>
 
-    <!-- Header (完全復刻第一版深色 Header) -->
-    <header class="header-bg text-white border-b border-slate-800/80 sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3.5">
-                <div class="w-11 h-11 rounded-2xl bg-slate-800 border border-slate-700/80 flex items-center justify-center text-2xl shadow-inner">
-                    🧠
-                </div>
-                <div>
-                    <h1 class="text-2xl font-bold tracking-tight text-white">
-                        Neuroscience Notes
-                    </h1>
-                    <p class="text-xs text-slate-400 font-light">神經科學文獻研讀・影像分析・臨床心得紀錄</p>
-                </div>
-            </div>
-            
-            <div class="flex items-center gap-2.5 bg-slate-800/90 border border-slate-700/60 rounded-full px-4 py-1.5 text-xs font-medium text-slate-300">
-                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
-                <span>累積參訪人次</span>
-                <span id="visitor-count" class="text-sm font-bold text-white ml-1">...</span>
-            </div>
-        </div>
-    </header>
+    <div class="mn-grid">
+      <!-- 側欄 -->
+      <aside>
+        <div class="mn-navlabel">Navigation</div>
+        <nav id="nav"></nav>
+      </aside>
 
-    <!-- Main Container -->
-    <div class="max-w-7xl mx-auto px-6 py-8 flex-1 grid grid-cols-1 lg:grid-cols-4 gap-8 w-full">
-        
-        <!-- Sidebar -->
-        <aside class="space-y-6">
-            <!-- Bio Card -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 card-shadow text-center">
-                <div class="w-20 h-20 mx-auto rounded-3xl brain-avatar-bg flex items-center justify-center text-3xl mb-4 shadow-inner">
-                    🧠
-                </div>
-                <h3 class="text-base font-bold text-slate-900 mb-2">關於本站</h3>
-                <p class="text-xs text-slate-500 leading-relaxed px-2">
-                    記錄臨床神經醫學、腦功能影像 (fMRI/MRI)、腦波分析與失智症照護研讀心得。歡迎交流討論。
-                </p>
-            </div>
-
-            <!-- Search Card -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 card-shadow space-y-3">
-                <h4 class="text-xs font-bold text-slate-900">搜尋文章</h4>
-                <div class="relative">
-                    <input type="text" id="search-input" placeholder="輸入關鍵字 (如: fMRI, BPSD)..." class="w-full pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500">
-                    <button id="search-btn" class="absolute right-1.5 top-1.5 bg-teal-600 hover:bg-teal-700 text-white p-1.5 rounded-lg text-xs transition-colors">
-                        🔍
-                    </button>
-                </div>
-            </div>
-
-            <!-- Categories Card -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 card-shadow space-y-3">
-                <h4 class="text-xs font-bold text-slate-900 mb-2">文章分類</h4>
-                <nav class="space-y-1">
-                    <button class="cat-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all flex justify-between items-center bg-teal-50 text-teal-700 font-semibold" data-category="all">
-                        <span>全部文章</span>
-                        <span class="px-2 py-0.5 rounded-full bg-white text-teal-700 font-bold text-[10px] shadow-xs" id="count-all">0</span>
-                    </button>
-                    <button class="cat-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 transition-all flex justify-between items-center" data-category="paper">
-                        <span>論文研讀</span>
-                        <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold text-[10px]" id="count-paper">0</span>
-                    </button>
-                    <button class="cat-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 transition-all flex justify-between items-center" data-category="neuroimaging">
-                        <span>神經影像</span>
-                        <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold text-[10px]" id="count-neuroimaging">0</span>
-                    </button>
-                    <button class="cat-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 transition-all flex justify-between items-center" data-category="clinical">
-                        <span>臨床筆記</span>
-                        <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold text-[10px]" id="count-clinical">0</span>
-                    </button>
-                    <button class="cat-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 transition-all flex justify-between items-center" data-category="bpsd">
-                        <span>失智症與BPSD</span>
-                        <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold text-[10px]" id="count-bpsd">0</span>
-                    </button>
-                </nav>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="lg:col-span-3 space-y-6">
-            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
-                <h2 id="current-category-title" class="text-lg font-bold text-slate-900">所有文章</h2>
-                <span class="text-xs text-slate-400">排序：最新發布</span>
-            </div>
-
-            <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Posts inserted by JavaScript with exact v1 card styling -->
-            </div>
-        </main>
+      <!-- 主面板（由 app.js 填入 feed 或 detail） -->
+      <main id="panel" class="mn-panel"></main>
     </div>
 
-    <!-- Modal -->
-    <div id="article-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden overflow-y-auto p-4 sm:p-6 flex justify-center items-start">
-        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden my-8 border border-slate-100 relative">
-            <button id="modal-close" class="absolute right-4 top-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors">✕</button>
-            
-            <div class="p-8 space-y-6">
-                <div>
-                    <span id="modal-category" class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 text-teal-700 mb-3">分類</span>
-                    <h1 id="modal-title" class="text-xl sm:text-2xl font-bold text-slate-900 leading-snug">文章標題</h1>
-                    <div class="flex items-center gap-4 text-xs text-slate-400 mt-3 border-b border-slate-100 pb-4">
-                        <span id="modal-date">🗓️ 2026-08-12</span>
-                        <span id="modal-read-time">⏱️ 閱讀時間 5 分鐘</span>
-                    </div>
-                </div>
-
-                <div id="modal-body" class="text-slate-600 text-sm leading-relaxed space-y-3">
-                    <!-- Body Content -->
-                </div>
-
-                <div class="pt-6 border-t border-slate-100">
-                    <h3 class="text-base font-bold text-slate-900 mb-4">💬 讀者留言與討論</h3>
-                    
-                    <div id="comments-list" class="space-y-3 mb-6">
-                        <!-- Comments inserted dynamically -->
-                    </div>
-
-                    <form id="comment-form" name="blog-comments" method="POST" data-netlify="true" class="bg-slate-50 p-4 rounded-xl border border-slate-200/60 space-y-3">
-                        <input type="hidden" name="form-name" value="blog-comments">
-                        <input type="hidden" id="form-article-id" name="article-id" value="">
-                        
-                        <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider">發表新留言</h4>
-                        <div>
-                            <input type="text" id="comment-name" name="name" placeholder="您的暱稱 / 職稱 *" required class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500">
-                        </div>
-                        <div>
-                            <textarea id="comment-message" name="message" rows="3" placeholder="請分享您的心得或看法..." required class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"></textarea>
-                        </div>
-                        <button type="submit" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-xs font-bold shadow-sm transition-all">送出留言</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <!-- 分析列 -->
+    <div class="mn-stats">
+      <div class="mn-stat">
+        <div class="lbl">Total Views</div>
+        <div class="val" id="views">—</div>
+      </div>
+      <div class="mn-divider"></div>
+      <div class="mn-stat cat">
+        <div class="lbl">Category</div>
+        <div class="val" id="catlabel">All</div>
+      </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200/60 py-6 text-center text-xs text-slate-400 mt-auto">
-        <p>&copy; 2026 Neuroscience Notes Blog. Hosted on Netlify & GitHub.</p>
+    <footer class="mn-foot">
+      <span>Neuroscience Blog Platform</span>
+      <span id="foot-views"></span>
     </footer>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- 內容與設定 -->
+  <script src="posts.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

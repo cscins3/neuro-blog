@@ -1,0 +1,81 @@
+:root{
+  --bg:#0A0A0C; --panel:#141416; --panel2:#1A1A1D; --line:#2A2A2F;
+  --text:#F3F3F1; --body:#C3C3C8; --mute:#76767C; --accent:#909DEA; --accent2:#AEB6EF;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--text); min-height:100vh;
+  font-family:'Inter','Noto Sans TC',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.serif{font-family:'Newsreader','Noto Serif TC',Georgia,serif;}
+
+.mn-wrap{max-width:1120px;margin:0 auto;padding:56px 32px 40px;}
+.mn-hd{font-weight:300;font-size:clamp(30px,5vw,52px);letter-spacing:-.01em;
+  color:var(--text);margin:0 0 46px;line-height:1.05;}
+
+.mn-grid{display:grid;grid-template-columns:210px 1fr;gap:52px;align-items:start;}
+
+/* 側欄 */
+.mn-navlabel{font-size:11px;letter-spacing:.24em;color:var(--mute);text-transform:uppercase;margin:6px 0 22px;}
+.mn-navitem{display:flex;align-items:center;gap:13px;background:none;border:0;cursor:pointer;
+  padding:11px 0;width:100%;text-align:left;color:var(--body);
+  font-family:'Newsreader','Noto Serif TC',serif;font-size:18px;transition:color .16s;}
+.mn-navitem:hover{color:var(--text);}
+.mn-navitem.on{color:var(--text);}
+.mn-mark{width:12px;height:12px;flex:0 0 auto;}
+
+/* 主面板 */
+.mn-panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:34px 40px;min-height:340px;}
+.mn-back{background:none;border:0;color:var(--accent);cursor:pointer;font-size:15px;
+  font-family:'Newsreader',serif;padding:0 0 20px;display:inline-flex;gap:8px;align-items:center;}
+.mn-back:hover{color:var(--accent2);}
+.mn-eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:500;}
+.mn-arttitle{font-family:'Newsreader','Noto Serif TC',serif;font-weight:600;color:var(--text);
+  font-size:clamp(26px,3.6vw,40px);line-height:1.18;margin:16px 0 22px;letter-spacing:-.005em;}
+.mn-prose{font-family:'Newsreader','Noto Serif TC',serif;font-size:18px;line-height:1.8;color:var(--body);}
+.mn-prose p{margin:0 0 20px;}
+.mn-artimg{width:100%;border-radius:10px;margin:8px 0 24px;display:block;}
+.mn-artmeta{display:flex;gap:16px;align-items:center;color:var(--mute);font-size:13px;
+  margin-top:26px;padding-top:18px;border-top:1px solid var(--line);}
+
+/* Feed 列表 */
+.mn-feeditem{border-bottom:1px solid var(--line);padding:22px 0;cursor:pointer;}
+.mn-feeditem:first-child{padding-top:4px;}
+.mn-feeditem:last-child{border-bottom:0;}
+.mn-feedtitle{font-family:'Newsreader','Noto Serif TC',serif;font-size:23px;font-weight:500;
+  color:var(--text);margin:9px 0 8px;line-height:1.28;transition:color .16s;}
+.mn-feeditem:hover .mn-feedtitle{color:var(--accent2);}
+.mn-feedex{color:var(--mute);font-size:14.5px;line-height:1.6;}
+.mn-feeddate{color:var(--mute);font-size:12.5px;margin-top:10px;letter-spacing:.02em;}
+.mn-thumb{width:100%;max-height:200px;object-fit:cover;border-radius:9px;margin-top:14px;}
+.mn-empty{color:var(--mute);font-size:14px;padding:12px 0;}
+
+/* 分析列 */
+.mn-stats{display:flex;justify-content:center;align-items:center;margin:56px 0 30px;}
+.mn-stat{text-align:center;padding:0 46px;}
+.mn-stat .lbl{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);}
+.mn-stat .val{font-size:24px;font-weight:600;color:var(--text);margin-top:8px;letter-spacing:.01em;}
+.mn-stat.cat .val{font-family:'Newsreader','Noto Serif TC',serif;font-weight:500;}
+.mn-divider{width:1px;height:44px;background:var(--line);}
+
+/* 留言區（Giscus 容器） */
+.mn-cmts{margin-top:40px;padding-top:28px;border-top:1px solid var(--line);}
+.mn-cmts h4{font-family:'Newsreader','Noto Serif TC',serif;font-size:18px;font-weight:500;margin:0 0 14px;color:var(--text);}
+.mn-cmts .notice{color:var(--mute);font-size:13.5px;line-height:1.7;
+  background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:14px 16px;}
+.mn-cmts .notice code{color:var(--accent2);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;}
+
+/* 頁尾 */
+.mn-foot{margin-top:28px;padding-top:22px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--mute);font-size:12px;}
+
+@media (max-width:820px){
+  .mn-grid{grid-template-columns:1fr;gap:30px;}
+  .mn-panel{padding:26px 22px;}
+  .mn-stat{padding:0 28px;}
+  .mn-wrap{padding:40px 22px 36px;}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto !important;}}
