@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神經科學研究與臨床筆記 | Neuroscience Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 頂部導覽列 -->
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="brand">
+                <span class="logo-icon">🧠</span>
+                <div>
+                    <h1 class="site-title">Neuroscience Notes</h1>
+                    <p class="site-subtitle">神經科學文獻研讀・影像分析・臨床心得紀錄</p>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat-badge">
+                    <span class="stat-icon">👁️</span>
+                    <span class="stat-label">累積參訪人次</span>
+                    <span id="visitor-count" class="stat-value">...</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主體內容區 -->
+    <div class="container main-layout">
+        <!-- 側邊欄 / 個人簡介與搜尋 -->
+        <aside class="sidebar">
+            <div class="card bio-card">
+                <div class="avatar-placeholder">🧠</div>
+                <h3>關於本站</h3>
+                <p>記錄臨床神經醫學、腦功能影像 (fMRI/MRI)、腦波分析與失智症照護研讀心得。歡迎交流討論。</p>
+            </div>
+
+            <div class="card search-card">
+                <h4>搜尋文章</h4>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="輸入關鍵字 (如: fMRI, BPSD)...">
+                    <button id="search-btn">🔍</button>
+                </div>
+            </div>
+
+            <div class="card categories-card">
+                <h4>文章分類</h4>
+                <ul class="category-list">
+                    <li><button class="cat-btn active" data-category="all">全部文章 <span class="count" id="count-all">0</span></button></li>
+                    <li><button class="cat-btn" data-category="paper">論文研讀 <span class="count" id="count-paper">0</span></button></li>
+                    <li><button class="cat-btn" data-category="neuroimaging">神經影像 <span class="count" id="count-neuroimaging">0</span></button></li>
+                    <li><button class="cat-btn" data-category="clinical">臨床筆記 <span class="count" id="count-clinical">0</span></button></li>
+                    <li><button class="cat-btn" data-category="bpsd">失智症與BPSD <span class="count" id="count-bpsd">0</span></button></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 主要文章列表區 -->
+        <main class="content-area">
+            <div class="content-header">
+                <h2 id="current-category-title">所有文章</h2>
+                <div class="sort-wrapper">
+                    <span>排序：最新發布</span>
+                </div>
+            </div>
+
+            <!-- 文章動態渲染列表 -->
+            <div id="posts-grid" class="posts-grid">
+                <!-- 由 JavaScript 動態生成文章卡片 -->
+            </div>
+        </main>
+    </div>
+
+    <!-- 文章詳細閱讀 Modal 視窗 -->
+    <div id="article-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <article class="modal-article">
+                <div class="modal-header">
+                    <span id="modal-category" class="badge">分類</span>
+                    <h1 id="modal-title">文章標題</h1>
+                    <div class="modal-meta">
+                        <span id="modal-date">🗓️ 2026-08-12</span>
+                        <span id="modal-read-time">⏱️ 閱讀時間 5 分鐘</span>
+                    </div>
+                </div>
+                
+                <div id="modal-body" class="modal-body">
+                    <!-- 文章內文 -->
+                </div>
+
+                <hr class="divider">
+
+                <!-- Netlify 互動留言區 -->
+                <section class="comments-section">
+                    <h3>💬 讀者留言與討論</h3>
+                    
+                    <!-- 已有留言列表 -->
+                    <div id="comments-list" class="comments-list">
+                        <!-- 動態渲染留言 -->
+                    </div>
+
+                    <!-- Netlify 表單 (支援靜態網站表單收集) -->
+                    <form id="comment-form" name="blog-comments" method="POST" data-netlify="true" class="comment-form">
+                        <input type="hidden" name="form-name" value="blog-comments">
+                        <input type="hidden" id="form-article-id" name="article-id" value="">
+                        
+                        <h4>發表新留言</h4>
+                        <div class="form-group">
+                            <label for="comment-name">您的暱稱 / 職稱 *</label>
+                            <input type="text" id="comment-name" name="name" placeholder="例如：張醫師 / 研討會學員" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment-message">留言內容 *</label>
+                            <textarea id="comment-message" name="message" rows="4" placeholder="請分享您的想法或提問..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">送出留言</button>
+                    </form>
+                </section>
+            </article>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Neuroscience Notes Blog. Hosted on Netlify & GitHub.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
