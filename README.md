@@ -1,1 +1,1 @@
-# neuro-blog
+# neuroscience-blog
